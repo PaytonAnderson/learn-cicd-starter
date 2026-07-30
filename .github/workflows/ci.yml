@@ -35,3 +35,7 @@ jobs:
 
       - name: test fmt
         run: test -z $(go fmt ./...)
+
+      - name: Insall staticcheck
+        run: go install honnef.co/go/tools/cmd/staticcheck@latest
+    
