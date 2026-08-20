@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/cors"
@@ -32,6 +33,7 @@ func main() {
 	}
 
 	port := os.Getenv("PORT")
+	log.Printf("PORT: %s\n", port)
 	if port == "" {
 		log.Fatal("PORT environment variable is not set")
 	}
@@ -92,7 +94,7 @@ func main() {
 	srv := &http.Server{
 		Addr:              ":" + port,
 		Handler:           router,
-		ReadHeaderTimeout: 5,
+		ReadHeaderTimeout: 5 * time.Second,
 	}
 
 	port = strings.ReplaceAll(port, "\n", "")
